@@ -7,14 +7,14 @@ var nixonBtn = document.getElementById("nixonBtn");
 
 
 function voteNixon(){
-    alert("Thank you for voting! Feel free to do so again.");
+    this.alert("Thank you for voting! Feel free to do so again.");
 }
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
 
-mcGovBtn.onclick = e => {
+mcGovBtn.onclick = () => {
     if(doubtCheck == 0){
         var voteCheck = confirm("Did you mean to vote for Nixon?");
         if(voteCheck == true){
@@ -34,14 +34,22 @@ mcGovBtn.onclick = e => {
         }
     }else if(doubtCheck == 2){
         var voteCheck = confirm("You still want to vote for McGovern??");
-
+        if(voteCheck == true){
+            alert("Fine be that way...");
+        }else{
+            voteNixon();
+        }
+        mcGovBtn.style.position = `relative`;
+        mcGovBtn.style.left = `0px`;
+        mcGovBtn.style.top = `0px`;
+        mcGovBtn.removeEventListener("mouseenter", dodge);
+        window.addEventListener("mousemove", follow);
     }
         
     doubtCheck++;
 }
 
 let dodge = (event) => {
-    console.log(`trigger`);
     mcGovBtn.style.position = `fixed`;
     var newX = 0;
     var newY = 0;
@@ -54,8 +62,34 @@ let dodge = (event) => {
     }else{
         mcGovBtn.style.left = `100px`;
         mcGovBtn.style.top = `100px`;
-        // mcGovImg.style.rotate ***** STOPPED HERE FOR THE DAY *****
     }   
+    
+}
+
+let follow = (event) => {
+    console.log(`check`);
+    newX = event.clientX - 25;
+    newY = event.clientY - 13;
+    nixonBtn.style.position = `fixed`;
+    nixonBtn.style.left = `${newX}px`;
+    nixonBtn.style.top = `${newY}px`;
+    nixonBtn.style.index = 1;
+
+    nixonBtn.removeAttribute('onclick');
+    nixonBtn.addEventListener('click', maybeNixon);
+}
+
+let maybeNixon = () => {
+    var voteCheck = confirm("So you finally came around to voting for Nixon?")
+    if(voteCheck == true){
+        voteNixon();
+    }else{
+        alert("You're only making this harder on yourself :3");
+    }
+    nixonBtn.style.position = `relative`;
+    nixonBtn.style.left = `0px`;
+    nixonBtn.style.top = `0px`;
+    window.removeEventListener("mousemove", follow);
     
 }
 
@@ -63,25 +97,25 @@ window.onload = function(){
     this.prompt('Enter valid voter id:', );
 }
 
-let mouseEvent = (event) => {
+let cardEvent = (event) => {
     var voteCheck = confirm('Did you want to vote for Nixon?');
     if(voteCheck == true){
         voteNixon();
     }else{
-        mcGovCard.addEventListener('mouseenter', mouseEvent2);
+        mcGovCard.addEventListener('mouseenter', cardEvent2);
     }
-    mcGovCard.removeEventListener('mouseenter', mouseEvent);
+    mcGovCard.removeEventListener('mouseenter', cardEvent);
 }
 
-let mouseEvent2 = (event) => {
+let cardEvent2 = (event) => {
     var voteCheck = confirm("Are sure you didn't want to vote for Nixon?");
     if(voteCheck == true){
-        mcGovCard.removeEventListener('mouseenter', mouseEvent2);
+        mcGovCard.removeEventListener('mouseenter', cardEvent2);
     }else{
         voteNixon();
     }
 }
 
-mcGovCard.addEventListener('mouseenter', mouseEvent);
+mcGovCard.addEventListener('mouseenter', cardEvent);
 
 
