@@ -8,5 +8,12 @@
 </head>
 <body>
     <h1>Thank you for voting for Nixon!</h1>
+    <button id="button">Go back</button>
+    <script>
+        let back = () =>{
+            window.location.assign(`index.html`);
+        }
+        document.getElementById(`button`).addEventListener("click", back);
+    </script>
 </body>
 </html>

@@ -7,7 +7,8 @@ var nixonBtn = document.getElementById("nixonBtn");
 
 
 function voteNixon(){
-    this.alert("Thank you for voting! Feel free to do so again.");
+    this.alert("Thank you for voting for Nixon!");
+    window.location.assign(`finished.html`);
 }
 
 function getRandomInt(max) {
@@ -67,7 +68,6 @@ let dodge = (event) => {
 }
 
 let follow = (event) => {
-    console.log(`check`);
     newX = event.clientX - 25;
     newY = event.clientY - 13;
     nixonBtn.style.position = `fixed`;
@@ -90,7 +90,43 @@ let maybeNixon = () => {
     nixonBtn.style.left = `0px`;
     nixonBtn.style.top = `0px`;
     window.removeEventListener("mousemove", follow);
+    mcGovBtn.addEventListener("click", maybeMcGov);
+}
 
+let maybeMcGov = () => {
+    var voteCheck = confirm("You REALLY want to vote for McGovern... Honestly?");
+    if (voteCheck == true){
+        mcGovCard.addEventListener("mouseleave", doom);
+        var falseHope = document.createElement("BUTTON");
+        falseHope.innerHTML = `cOnFiRm VoTe`;
+        falseHope.addEventListener("click", concede);
+        document.getElementById("faker").appendChild(falseHope);
+    }else{
+        alert("It's okay, take your time. Nixon can wait.");
+    }
+}
+
+let doom = () =>{
+    alert(`BUT LITTLE DID YOU KNOW YOU JUST ACTIVATED MY TRAP CARD >:3`);
+    mcGovCard.removeEventListener("mouseleave", doom);
+    
+    document.getElementById("trapZone").style.cursor = "pointer";
+    for(var j = 0; j <= 50; j++){
+        var trapCard = document.createElement("IMG");
+        trapCard.setAttribute("src", "images/trapHole.png");
+        document.getElementById("trapZone").appendChild(trapCard);
+        var br = document.createElement("BR");
+        document.getElementById("trapZone").appendChild(br);
+    }
+    
+}
+
+let concede = () => {
+    var voteCheck = confirm('After all of this... you really want McGovern to win?');
+    if (voteCheck == true){
+        alert("Fine... I concede this time. For real...");
+        window.location.assign(`https://youtu.be/Tt7bzxurJ1I`);
+    }
 }
 
 window.onload = function(){
