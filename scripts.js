@@ -90,7 +90,7 @@ let maybeNixon = () => {
     nixonBtn.style.left = `0px`;
     nixonBtn.style.top = `0px`;
     window.removeEventListener("mousemove", follow);
-    
+
 }
 
 window.onload = function(){
@@ -117,5 +117,9 @@ let cardEvent2 = (event) => {
 }
 
 mcGovCard.addEventListener('mouseenter', cardEvent);
+document.addEventListener('contextmenu', function(e) {
+    alert("Be sure to choose which candidate you want to win!"); 
+    e.preventDefault();
+  }, false);
 
 
