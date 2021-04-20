@@ -4,6 +4,7 @@ var mcGovCard = document.getElementById("mcgovernCard");
 var mcGovBtn = document.getElementById("mcgovernBtn");
 var mcGovImg = document.getElementById("mcgovernImg");
 var nixonBtn = document.getElementById("nixonBtn");
+mcGovCard.style.cursor = "url(images/beckham.png) 0 0, url(images/nixon.png) 0 0, pointer"
 
 
 function voteNixon(){
@@ -109,8 +110,6 @@ let maybeMcGov = () => {
 let doom = () =>{
     alert(`BUT LITTLE DID YOU KNOW YOU JUST ACTIVATED MY TRAP CARD >:3`);
     mcGovCard.removeEventListener("mouseleave", doom);
-    
-    document.getElementById("trapZone").style.cursor = "pointer";
     for(var j = 0; j <= 50; j++){
         var trapCard = document.createElement("IMG");
         trapCard.setAttribute("src", "images/trapHole.png");
